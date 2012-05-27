@@ -1,5 +1,8 @@
 package domain.model;
 
+import javax.persistence.Entity;
+
+@Entity
 public class NormalScore extends Score {
 
 	private static final long serialVersionUID = -4678229424096642105L;

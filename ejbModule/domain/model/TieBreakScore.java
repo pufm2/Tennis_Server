@@ -1,5 +1,8 @@
 package domain.model;
 
+import javax.persistence.Entity;
+
+@Entity
 public class TieBreakScore extends Score {
 
 	private static final long serialVersionUID = -8587604155526648913L;

@@ -7,7 +7,7 @@ import javax.persistence.PersistenceContext;
 import domain.model.Tournament;
 
 @Stateless
-public class RepositoryTennisJPA implements RepositoryTennis{
+public class RepositoryTennisJPA implements RepositoryTennis {
 
 	@PersistenceContext(unitName="TennisPU")
 	protected EntityManager em;
@@ -16,20 +16,13 @@ public class RepositoryTennisJPA implements RepositoryTennis{
 
 	}
 
-	@Override
-	public void register(Tournament tournament) {
-		em.persist(tournament);
+	public void register(Object object) {
+		em.persist(object);
+		//em.flush();
 	}
 
-	@Override
-	/*
-	 * Neu ham nay luon luon tra ve null => ghi nhan tat ca lan choi cua 1 player
-	 */
 	public Tournament recorverTournament(int id) {
-//		if (playerName.equals(""))
-//			return null;
-//		else
-//			return em.find(FizzBuzz.class, playerName); // ham find chi thao tac tren Primary key cua class
-		return null;
+
+		return em.find(Tournament.class, id);
 	}
 }

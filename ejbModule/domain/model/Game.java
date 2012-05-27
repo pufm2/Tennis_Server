@@ -3,18 +3,37 @@ package domain.model;
 import java.io.Serializable;
 import java.util.Random;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public abstract class Game implements Serializable {
 
 	private static final long serialVersionUID = 1838138265867506941L;
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int gameID;
+	
+	@OneToOne(cascade = CascadeType.ALL)
 	private Score scoreServer;
+	
+	@OneToOne(cascade = CascadeType.ALL)
 	private Score scoreReceiver;
 	
-	private Player server, receiver, winner;
+	@OneToOne(cascade = CascadeType.ALL)
+	private Player server;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	private Player receiver;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	private Player winner;
+	
 	private boolean endGame = false;
 
 	public Game() {

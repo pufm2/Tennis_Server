@@ -4,15 +4,37 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+@Entity
 public class TennisSet implements Serializable {
 
 	private static final long serialVersionUID = -5910037733532425929L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int setID;
+	
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Game> lstGame = new ArrayList<Game>();
 	private int pointOfPlayer1 = 0;
 	private int pointOfPlayer2 = 0;
 
-	private Player player1, player2, winner;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	private Player player1;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	private Player player2;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	private Player winner;
 	private boolean endSet = false;
 
 	public TennisSet() {

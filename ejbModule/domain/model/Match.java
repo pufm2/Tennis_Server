@@ -4,20 +4,38 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+@Entity
 public class Match implements Serializable {
 
 	private static final long serialVersionUID = -1090083898925539191L;
 
 	public static final int MAX_SET = 3;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int matchID;
+	
+	@OneToOne(cascade = CascadeType.ALL)
 	private Player player1;
+	
+	@OneToOne(cascade = CascadeType.ALL)
 	private Player player2;
+	
+	@OneToOne(cascade = CascadeType.ALL)
 	private Player winner;
 
 	private int player1SetWon = 0;
 	private int player2SetWon = 0;
 
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<TennisSet> lstSet = new ArrayList<TennisSet>();
 
 	public Match() {
@@ -101,5 +119,13 @@ public class Match implements Serializable {
 
 	public void setWinner(Player winner) {
 		this.winner = winner;
+	}
+
+	public List<TennisSet> getLstSet() {
+		return lstSet;
+	}
+
+	public void setLstSet(List<TennisSet> lstSet) {
+		this.lstSet = lstSet;
 	}
 }
