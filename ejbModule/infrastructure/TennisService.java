@@ -56,6 +56,7 @@ public class TennisService implements TennisServiceRemote {
 			}
 			result += "\n";
 		}
+		result += "THE CHAMPION IS : " + tournament.getWinner();
 		return result;
 	}
 

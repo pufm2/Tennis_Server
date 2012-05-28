@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import utils.Utils;
 
@@ -23,6 +24,9 @@ public class Tournament {
 
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Player> players;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	private Player winner;
 
 	public Tournament() {
 	}
@@ -50,10 +54,6 @@ public class Tournament {
 				matchs.add(match);
 
 				match.play();
-
-				/*System.out.println(player1.getPlayerName() + "-" + player2.getPlayerName()
-						+ ": " + match.getWinner().getPlayerName());*/
-
 				if (player1.equals(match.getWinner())) {
 					winners.add(player1);
 				} else {
@@ -63,6 +63,7 @@ public class Tournament {
 			players.addAll(winners);
 			winners.clear();
 		}
+		winner = players.get(0);
 
 	}
 
@@ -84,5 +85,13 @@ public class Tournament {
 
 	public void setMatchs(List<Match> matchs) {
 		this.matchs = matchs;
+	}
+
+	public Player getWinner() {
+		return winner;
+	}
+
+	public void setWinner(Player winner) {
+		this.winner = winner;
 	}
 }

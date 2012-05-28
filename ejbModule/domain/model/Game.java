@@ -134,7 +134,7 @@ public abstract class Game implements Serializable {
 		this.endGame = endGame;
 	}
 	
-	private void refresh() {
+	void refresh() {
 		if (scoreServer.getCurrentScore().equals("game")) {
 			winner = server;
 			endGame = true;
