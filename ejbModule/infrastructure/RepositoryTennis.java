@@ -2,11 +2,8 @@ package infrastructure;
 
 import javax.ejb.Local;
 
-import domain.model.Tournament;
-
-
 @Local
 public interface RepositoryTennis {
-	public void register(Object object);
-	public Tournament recorverTournament(int id);
+	public void persist(Object object);
+	public <T> T find(Class<T> clazz, int id);
 }

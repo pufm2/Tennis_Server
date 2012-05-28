@@ -45,6 +45,8 @@ public class Match implements Serializable {
 
 		this.player1 = player1;
 		this.player2 = player2;
+		player1.addMatch(this);
+		player2.addMatch(this);
 	}
 
 	public void addSet(TennisSet set) {
@@ -80,7 +82,7 @@ public class Match implements Serializable {
 				&& lstSet.size() < MAX_SET) {
 			playMatch(new TennisSet(player1, player2));
 		}
-		if (player1SetWon > player1SetWon) {
+		if (player1SetWon > player2SetWon) {
 			winner = player1;
 		} else {
 			winner = player2;
@@ -94,7 +96,7 @@ public class Match implements Serializable {
 		if (player1.equals(set.getWinner())) {
 			player1SetWon++;
 		} else
-			player1SetWon++;
+			player2SetWon++;
 	}
 
 	public void setMatchID(int matchID) {

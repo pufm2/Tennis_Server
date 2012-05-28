@@ -1,11 +1,16 @@
 package domain.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Player implements Serializable {
@@ -15,6 +20,9 @@ public class Player implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int playerID;
+	
+	@ManyToMany
+	private List<Match> matchs = new ArrayList<Match>();
 
 	private String playerName;
 	
@@ -42,6 +50,18 @@ public class Player implements Serializable {
 		this.playerName = playerName;
 	}
 
+	public List<Match> getMatchs() {
+		return matchs;
+	}
+
+	public void setMatchs(List<Match> matchs) {
+		this.matchs = matchs;
+	}
+	
+	public void addMatch(Match match) {
+		matchs.add(match);
+	}
+
 	public boolean equals(Object o) {
 		if (o instanceof Player) {
 			Player player = (Player) o;
@@ -49,5 +69,9 @@ public class Player implements Serializable {
 		} else {
 			return false;
 		}
+	}
+	
+	public String toString() {
+		return playerName;
 	}
 }

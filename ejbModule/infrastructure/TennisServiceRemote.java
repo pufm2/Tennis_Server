@@ -4,6 +4,6 @@ import javax.ejb.Remote;
 
 @Remote
 public interface TennisServiceRemote {
-	public void play();
-	public String f();
+	public String play(int numberOfPlayer);
+	public String getTournament(int id);
 }

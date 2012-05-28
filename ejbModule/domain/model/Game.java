@@ -1,7 +1,6 @@
 package domain.model;
 
 import java.io.Serializable;
-import java.util.Random;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -9,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+
+import utils.Utils;
 
 @Entity
 public abstract class Game implements Serializable {
@@ -64,12 +65,10 @@ public abstract class Game implements Serializable {
 
 	// Play game
 	public void playGame(){
-		Random random = new Random();
-		int randomValue;
 		
 		while (!isEndGame()){
-			randomValue = random.nextInt(20);
-			serve(randomValue % 2);
+			int randomValue = Utils.getRandomNumber(2);
+			serve(randomValue);
 			
 			refresh();
 		}

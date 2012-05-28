@@ -93,26 +93,15 @@ public class TennisSet implements Serializable {
 	public void playSet() {
 		Player server = player1;
 		Player receiver = player2;
-		while (pointOfPlayer1 < 6 && pointOfPlayer2 < 6
-				&& Math.abs(pointOfPlayer1 - pointOfPlayer2) < 2) {
-			playGame(new NormalGame(server, receiver));
-			// swap serving
-			Player temp = server;
-			server = receiver;
-			receiver = temp;
+		Game game = null;
+		while ((game = GameFactory.createGame(pointOfPlayer1, pointOfPlayer2, server, receiver)) != null) {
+			playGame(game);
 		}
-
-		if (pointOfPlayer1 == 6 && pointOfPlayer2 == 6)
-			playGame(new TieBreakGame(player1, player2));
 
 		if (pointOfPlayer1 > pointOfPlayer2) {
 			winner = player1;
-//			System.out.println("player 1 win set: " + pointOfPlayer1 + "-"
-//					+ pointOfPlayer2);
 		} else if (pointOfPlayer2 > pointOfPlayer1) {
 			winner = player2;
-//			System.out.println("player 2 win set: " + pointOfPlayer1 + "-"
-//					+ pointOfPlayer2);
 		}
 	}
 

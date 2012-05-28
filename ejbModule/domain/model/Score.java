@@ -34,4 +34,8 @@ public abstract class Score implements Serializable {
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	public String toString() {
+		return currentScore;
+	}
 }
